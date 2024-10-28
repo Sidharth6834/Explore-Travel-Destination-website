@@ -1,4 +1,4 @@
-/* General styling */
+
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #f8f9fa;
@@ -8,12 +8,11 @@ body {
     line-height: 1.6;
 }
 
-/* Header styling */
+
 header {
     background-image: url(vecteezy_ai-generated-nature-landscapes-background_36226616.jpg);
-    background-size: cover; /* Scales the image to cover the entire area */
-    background-position: center; /* Centers the image */
-    background-repeat: no-repeat;
+    background-size: cover; 
+    background-position: center; 
     color: yellow;
     padding: 1.5em;
     text-align: center;
@@ -50,7 +49,7 @@ select:hover, select:focus {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
 }
 
-/* Navigation links */
+
 nav h2 {
     display: flex;
     justify-content: center;
@@ -75,7 +74,6 @@ nav h2 {
     transform: scale(1.1);
 }
 
-/* Destination cards */
 .destination-list {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -119,8 +117,7 @@ nav h2 {
     color: #555;
 }
 
-/* Form styling */
-/* Contact Container Styles */.contact .row{
+.contact .row{
     display: flex;
     background:var(--black);
     background-color: rgb(236, 230, 230);
@@ -176,20 +173,19 @@ nav h2 {
     background:none;
 }
 .button1{
-    padding: 15px 400px; /* Increases the space inside the button */
-    font-size: 18px;    /* Increases the text size */
-    width: 200px;       /* Sets a specific width */
-    height: 50px;       /* Sets a specific height */
-     /* Background color */
-    color: white;       /* Text color */
-    border: none;       /* No border */
-    border-radius: 5px; /* Rounded corners */
+    padding: 15px 400px; 
+    font-size: 18px;    
+    width: 200px;       
+    height: 50px;     
+    
+    color: white;       
+    border: none;       
+    border-radius: 5px; 
     cursor: pointer;
 }
 
-/*kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk*/
 
-/* Social Icons */
+
 .social-icons {
     margin-top: 2em;
     display: flex;
@@ -209,7 +205,7 @@ nav h2 {
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
 }
 
-/* Responsive Design */
+
 @media (max-width: 768px) {
     header h1 {
         font-size: 2em;

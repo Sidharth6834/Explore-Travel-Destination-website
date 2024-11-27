@@ -63,10 +63,10 @@ const destinations = [
             "Bargaining is common in local markets."
         ],
     },
-    
+    // Add more destinations as needed
 ];
 
-
+// Function to display destinations
 function displayDestinations(filter = {}) {
     const destinationList = document.getElementById('destination-list');
     destinationList.innerHTML = '';
@@ -103,12 +103,13 @@ function displayDestinations(filter = {}) {
     });
 }
 
-
+// Function to show more info
 function showMoreInfo(destinationName) {
     const infoDiv = document.getElementById(`info-${destinationName}`);
     infoDiv.classList.toggle('hidden');
 }
 
+// Event listeners for filters
 document.getElementById('climate-filter').addEventListener('change', (e) => {
     displayDestinations({ climate: e.target.value });
 });
@@ -121,7 +122,7 @@ document.getElementById('budget-filter').addEventListener('change', (e) => {
     displayDestinations({ budget: e.target.value });
 });
 
-
+// Initial display of all destinations
 displayDestinations();
 document.getElementById('faq-link').addEventListener('click', function (event) {
     event.preventDefault(); // Prevent the default link behavior

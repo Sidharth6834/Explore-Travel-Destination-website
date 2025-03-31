@@ -1,122 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Travel Destination Explorer</title>
-    <link rel="stylesheet" href="styles.css">
-    <style>
-        
-    </style>
-    
+  <meta charset="UTF-8">
+  <title>Grocery Store</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <header>
-        <h1><i><u>Explore Travel Destinations</u></i></h1>
-        <div class="filters">
-            <select id="climate-filter">
-                <option value="">All Climates</option>
-                <option value="tropical">Tropical</option>
-                <option value="cold">Cold</option>
-                <option value="moderate">Moderate</option>
-            </select>
-            <select id="activity-filter">
-                <option value="">All Activities</option>
-                <option value="beach">Beach</option>
-                <option value="hiking">Trekking</option>
-                <option value="cultural">Cultural</option>
-            </select>
-            <select id="budget-filter">
-                <option value="">All Budgets</option>
-                <option value="budget">Budget-Friendly</option>
-                <option value="midrange">Midrange</option>
-                <option value="luxury">Luxury</option>
-            </select>
-        </div>
-       
-    <div class="filters">
-        
-    </div>
-    <nav><h2>
-        <a href="faq.html" class="link-item">FAQ</a>
-        <a href="user-guide.html" class="link-item">User Guide</a>
-        <a href="technical-guide.html" class="link-item">Technical Guide</a>
-        <a href="trending-destinations.html" class="link-item">Trending Travel Destinations</a>
-        <a href="About.html" class="link-item">About Us</a>
-        </h2>
+  <header>Grocery Management System</header>
+  <div class="container">
+    <section class="items" id="items"></section>
 
-</h2> </nav>
-    
-    </header>
-    
-    <main>
-        
-        
-        <div class="destination-list" id="destination-list">
-           
-        </div>
-        
-        
-        <section class="contact" id="contact">
+    <section class="cart">
+      <h2>Your Cart</h2>
+      <table class="cart-table">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+        <tbody id="cart"></tbody>
+      </table>
+    </section>
+  </div>
 
-            <h1 class="heading"> <span>contact</span> us </h1>
-        
-            <div class="row">
-        
-                <iframe class="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30153.788252261566!2d72.82321484621745!3d19.141690214227783!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7b63aceef0c69%3A0x2aa80cf2287dfa3b!2sJogeshwari%20West%2C%20Mumbai%2C%20Maharashtra%20400047!5e0!3m2!1sen!2sin!4v1629452077891!5m2!1sen!2sin" allowfullscreen="" loading="lazy"></iframe>
-        
-                <form action="">
-                    <h3>get in touch</h3>
-                    <div class="inputBox">
-                        <span class="fas fa-user"></span>
-                        <input type="text" placeholder="Name">
-                    </div>
-                    <div class="inputBox">
-                        <span class="fas fa-envelope"></span>
-                        <input type="email" placeholder="Email">
-                    </div>
-                    <div class="inputBox">
-                        <span class="fas fa-phone"></span>
-                        <input type="number" placeholder="Number">
-                    </div><div class="button1">
-                    <h1><input type="submit" value="Contact Now" class="btn" ></h1>
-                </div>
-                </form>
-        
-            </div>
-        
-        </section>
-        
-        
-               
-        
-            </div>
-        
-        </section>
-        
-        
-        
-            
-            <div class="social-icons">
-           
-                <a href="https://www.instagram.com/" target="_blank">
-                    <center><img src="insta.jpg" alt="Instagram" height="50">
-                </a>
-                <a href="https://www.linkedin.com/" target="_blank">
-                    <img src="link.png" alt="LinkedIn" height="50">
-                    
-                </a>
-                <a href="https://www.facebook.com/" target="_blank" >
-                    <img src="FACE.png" alt="Facebook" height="50"></center>
-                </a>
-            </div>
-        
-        
-        </div>
-    </div>
+  <div style="margin: 20px;">
+    <h3>Manual Add to Cart Test</h3>
+    <button id="reset-cart">Reset Cart</button>
+    <button onclick="addToCart('Apple', 30)">Add Apple to Cart</button>
+  </div>
+
+  <script>
+    const backendURL = "https://grocerymanagement-production.up.railway.app";
+
+    const items = [
+      { name: "Milk", price: 30, image: "milk.jpg" },
+      { name: "Bread", price: 25, image: "bread.jpg" },
+      { name: "Eggs", price: 60, image: "egg.jpg" },
+      { name: "Rice", price: 50, image: "rice.jpg" },
+      { name: "Apples", price: 70, image: "apple.jpg" }
+    ];
+
+    const itemsDiv = document.getElementById("items");
+    const cartTable = document.getElementById("cart");
+
+    items.forEach(item => {
+      const div = document.createElement("div");
+      div.className = "item-card";
+      div.innerHTML = `
+        <img src="${item.image}" alt="${item.name}" style="width:100px;height:100px;">
+        <h3>${item.name}</h3>
+        <p>Price: ₹${item.price}</p>
+        <button onclick="addToCart('${item.name}', ${item.price})">Add to Cart</button>
+      `;
+      itemsDiv.appendChild(div);
+    });
+
+    function addToCart(product, price) {
+      const row = document.createElement("tr");
+      row.innerHTML = `<td>${product}</td><td>₹${price}</td>`;
+      cartTable.appendChild(row);
+
+      fetch(`${backendURL}/add-to-cart`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ product, price })
+      }).then(res => {
+        if (res.ok) {
+          alert("Item added to cart!");
+        }
+      });
+    }
     
-    </main>
-    
-    <script src="script.js"></script>
+    document.getElementById("reset-cart").addEventListener("click", function () {
+      if (confirm("Are you sure you want to reset the cart?")) {
+        fetch(`${backendURL}/reset-cart`, { method: 'DELETE' })
+          .then(response => response.text())
+          .then(message => {
+            alert(message);
+            document.querySelector("#cart").innerHTML = ""; // Clear frontend cart UI
+          })
+          .catch(error => console.error("Error:", error));
+      }
+    });
+  </script>
 </body>
 </html>
